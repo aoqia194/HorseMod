@@ -4,9 +4,15 @@ on:
   push:
     branches-ignore:
       - main
+    paths:
+      - "docs/source/**"
+      - "Contents/mods/**/*.lua"
   pull_request:
     branches-ignore:
       - main
+    paths:
+      - "docs/source/**"
+      - "Contents/mods/**/*.lua"
   workflow_call:
   workflow_dispatch:
 
@@ -53,7 +59,7 @@ jobs:
           make html
 
       - name: Upload artifact
-        if: github.event_name == 'workflow_call' && github.workflow == 'Deploy Docs'
+        if: github.workflow == 'Deploy Docs'
         uses: actions/upload-pages-artifact@v4
         with:
           path: docs/build/html
